@@ -41,6 +41,7 @@ typedef void (^CargoBayPaymentQueueRestoreSuccessBlock)(SKPaymentQueue *queue);
 typedef void (^CargoBayPaymentQueueRestoreFailureBlock)(SKPaymentQueue *queue, NSError *error);
 typedef void (^CargoBayPaymentQueueUpdatedDownloadsBlock)(SKPaymentQueue *queue, NSArray *downloads);
 typedef BOOL (^CargoBayTransactionIDUniquenessVerificationBlock)(NSString *transactionID);
+typedef BOOL (^CargoBayShouldAddStorePaymentBlock)(SKPaymentQueue *queue, SKPayment *payment, SKProduct *product);
 
 extern NSDate * CBDateFromDateString(NSString *);
 extern NSString * CBBase64EncodedStringFromData(NSData *);
@@ -657,6 +658,7 @@ NSDictionary * CBPurchaseInfoFromTransactionReceipt(NSData *transactionReceiptDa
 @property (readwrite, nonatomic, copy) CargoBayPaymentQueueRestoreFailureBlock paymentQueueRestoreFailure;
 @property (readwrite, nonatomic, copy) CargoBayPaymentQueueUpdatedDownloadsBlock paymentQueueUpdatedDownloads;
 @property (readwrite, nonatomic, copy) CargoBayTransactionIDUniquenessVerificationBlock transactionIDUniquenessVerificationBlock;
+@property (readwrite, nonatomic, copy) CargoBayShouldAddStorePaymentBlock shouldAddStorePaymentBlock;
 @end
 
 @implementation CargoBay
@@ -949,6 +951,10 @@ NSDictionary * CBPurchaseInfoFromTransactionReceipt(NSData *transactionReceiptDa
     self.paymentQueueUpdatedDownloads = block;
 }
 
+- (void)setSetShouldAddStorePaymentBlock:(BOOL (^)(SKPaymentQueue *queue, SKPayment *payment, SKProduct *product))block {
+    self.shouldAddStorePaymentBlock = block;
+}
+
 #pragma mark - Receipt Verification
 
 - (BOOL)isValidTransaction:(SKPaymentTransaction *)transaction
@@ -1054,6 +1060,10 @@ restoreCompletedTransactionsFailedWithError:(NSError *)error
     if (self.paymentQueueRestoreFailure) {
         self.paymentQueueRestoreFailure(queue, error);
     }
+}
+
+- (BOOL)paymentQueue:(SKPaymentQueue *)queue shouldAddStorePayment:(SKPayment *)payment forProduct:(SKProduct *)product {
+    return self.shouldAddStorePaymentBlock(queue, payment, product);
 }
 
 @end

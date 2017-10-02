@@ -169,6 +169,13 @@
  */
 - (void)setPaymentQueueUpdatedDownloadsBlock:(void (^)(SKPaymentQueue *queue, NSArray *downloads))block;
 
+/**
+ Sets a block to be called if this app will support to show IAP in the Apple Store or not.
+
+ @param block When it is needed it will return YES. Otherwise NO.
+ */
+- (void)setSetShouldAddStorePaymentBlock:(BOOL (^)(SKPaymentQueue *queue, SKPayment *payment, SKProduct *product))block;
+
 @end
 
 ///----------------

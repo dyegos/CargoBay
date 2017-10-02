@@ -307,11 +307,6 @@
 				LastTestingUpgradeCheck = 0610;
 				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = "Mattt Thompson";
-				TargetAttributes = {
-					F853B17215FD71A100D5AC59 = {
-						DevelopmentTeam = BSXLNP33Y2;
-					};
-				};
 			};
 			buildConfigurationList = F853B16D15FD71A100D5AC59 /* Build configuration list for PBXProject "CargoBay (iOS)" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -611,6 +606,7 @@
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Prefix.pch;
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
@@ -652,6 +648,7 @@
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Prefix.pch;
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
